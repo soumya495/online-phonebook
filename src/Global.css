@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
+  list-style: none;
 }
 
 body {
@@ -92,7 +93,7 @@ nav ul li a:hover {
   margin: 30px 0;
   font-size: 20px;
 } */
-button {
+.col1 button {
   font-size: 17px;
   width: 135px;
   border: 0;
@@ -105,16 +106,16 @@ button {
   transition: width 0.5s;
 }
 
-button img {
+.col1 button img {
   width: 40px;
   display: none;
 }
 
-button:hover img {
+.col1 button:hover img {
   display: block;
 }
 
-button:hover {
+.col1 button:hover {
   width: 190px;
   display: flex;
   align-items: center;
@@ -373,4 +374,217 @@ form .button input {
   .user-details::-webkit-scrollbar {
     width: 0;
   }
+}
+
+/* LOG IN */
+
+.form-wrapper {
+  width: 100%;
+  min-height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 1px 4px 14px 6px rgb(0 0 0 / 5%);
+}
+.center h1 {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid silver;
+}
+.center form {
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+form .txt_field {
+  position: relative;
+  border-bottom: 2px solid #7c7c7c;
+  margin: 30px 0;
+}
+.txt_field input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+.txt_field label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #7c7c7c;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.txt_field span::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #e9236c;
+  transition: 0.5s;
+}
+.txt_field input:focus ~ label,
+.txt_field input:valid ~ label {
+  top: -5px;
+  color: #e9236c;
+}
+.txt_field input:focus ~ span::before,
+.txt_field input:valid ~ span::before {
+  width: 100%;
+}
+.pass {
+  margin: -5px 0 20px 5px;
+  color: #a6a6a6;
+  cursor: pointer;
+}
+.pass:hover {
+  text-decoration: underline;
+}
+input[type='submit'] {
+  width: 100%;
+  height: 50px;
+  border: 1px solid;
+  background: linear-gradient(90deg, #f4e72b, #ce0172);
+  border-radius: 25px;
+  font-size: 18px;
+  color: #e9f4fb;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+input[type='submit']:hover {
+  border-color: #2691d9;
+  transition: 0.5s;
+}
+.signup_link {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 16px;
+  color: #666666;
+}
+.signup_link a {
+  color: #e9236c;
+  text-decoration: none;
+}
+.signup_link a:hover {
+  color: #004a94;
+}
+
+.social-text {
+  text-align: center;
+  font-size: large;
+  margin-block: 0.5rem;
+}
+
+.social-login {
+  width: 80%;
+  cursor: pointer;
+  margin: 0 auto;
+  border: 2px solid silver;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding-block: 0.45rem;
+  margin-bottom: 2rem;
+  transition: transform 250ms ease-in;
+}
+
+.social-login:hover {
+  transform: translateY(-2px);
+}
+
+.social-login svg {
+  fill: #ce0172;
+}
+
+/* MODAL */
+.modal-wrapper {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px) brightness(70%);
+}
+
+.modal-body {
+  width: 90%;
+  max-width: 340px;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 1px 4px 14px 6px rgb(0 0 0 / 15%);
+}
+
+.modal-body p {
+  width: 90%;
+  margin: 0 auto;
+  font-size: x-large;
+  font-weight: 500;
+  text-align: left;
+}
+
+.mainModalText {
+  text-align: center !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.smallModaltext {
+  font-size: small !important;
+  text-align: center !important;
+}
+.modaltextgray {
+  font-size: medium !important;
+  color: #666666 !important;
+  font-weight: 700 !important;
+}
+
+.modal-btn-conatiner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.modal-btn-conatiner button {
+  width: 40%;
+  background: unset;
+  border: unset;
+  padding: 0.45rem 0.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.modal-btn-conatiner button:nth-child(1) {
+  outline: 2px solid #db2890;
+}
+
+.modal-btn-conatiner button:nth-child(2) {
+  background: linear-gradient(90deg, #f4e72b, #ce0172);
+  color: white;
+  font-weight: 600;
 }

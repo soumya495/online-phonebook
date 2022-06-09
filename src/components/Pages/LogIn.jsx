@@ -1,19 +1,18 @@
-import Navbar from '../Navbar'
 import { NavLink, useNavigate } from 'react-router-dom'
+import Navbar from '../Navbar'
 import SocialLogin from '../SocialLogin'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { createUserWithEmailAndPassword } from '@firebase/auth'
+import { signInWithEmailAndPassword } from '@firebase/auth'
 import { auth } from '../../firebase'
 
-function SignUp() {
+function LogIn() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    confirmPassword: '',
   })
 
-  const { email, password, confirmPassword } = formData
+  const { email, password } = formData
 
   const navigate = useNavigate()
 
@@ -26,24 +25,19 @@ function SignUp() {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault()
-    if (password !== confirmPassword) {
-      toast.warn('Passwords do not match')
-      return
-    }
-    console.log('Sign Up Data: ', formData)
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
-      toast.success(`Sign Up Successful`)
+      await signInWithEmailAndPassword(auth, email, password)
+      toast.success(`Logged in Successfully`)
       navigate('/profile')
     } catch (error) {
       toast.error(error.message)
     }
 
+    console.log('Login Data: ', formData)
     setFormData({
       email: '',
       password: '',
-      confirmPassword: '',
     })
   }
 
@@ -52,13 +46,13 @@ function SignUp() {
       <Navbar />
       <div className='form-wrapper'>
         <div className='center'>
-          <h1>Sign Up</h1>
+          <h1>Login</h1>
           <form onSubmit={handleOnSubmit}>
             <div className='txt_field'>
               <input
-                type='email'
-                id='email'
                 autoComplete='new-password'
+                id='email'
+                type='text'
                 value={email}
                 onChange={handleOnChange}
                 required
@@ -68,9 +62,9 @@ function SignUp() {
             </div>
             <div className='txt_field'>
               <input
-                type='password'
-                id='password'
                 autoComplete='new-password'
+                id='password'
+                type='password'
                 value={password}
                 onChange={handleOnChange}
                 required
@@ -78,21 +72,10 @@ function SignUp() {
               <span />
               <label>Password</label>
             </div>
-            <div className='txt_field'>
-              <input
-                type='password'
-                id='confirmPassword'
-                autoComplete='new-password'
-                value={confirmPassword}
-                onChange={handleOnChange}
-                required
-              />
-              <span />
-              <label>Confirm Password</label>
-            </div>
-            <input type='submit' defaultValue='Sign-Up' />
+            <div className='pass'>Forgot Password?</div>
+            <input type='submit' defaultValue='Login' />
             <div className='signup_link'>
-              Already Have an Account? <NavLink to='/log-in'>Log In</NavLink>
+              Not a member? <NavLink to='/sign-up'>Sign up</NavLink>
             </div>
           </form>
           <SocialLogin />
@@ -102,4 +85,4 @@ function SignUp() {
   )
 }
 
-export default SignUp
+export default LogIn

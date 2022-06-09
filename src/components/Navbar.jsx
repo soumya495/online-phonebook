@@ -1,7 +1,20 @@
-import { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import GlobalContext from '../GlobalContext'
+import Modal from './Modal'
+import { signOut } from '@firebase/auth'
+import { toast } from 'react-toastify'
+import { auth } from '../firebase'
 
 function Navbar() {
+  const { user } = useContext(GlobalContext)
+  const navigate = useNavigate()
+
+  const [modalOpen, setModalOpen] = useState(false)
+
+  console.log(user)
+
   useEffect(() => {
     const menuList = document.querySelector('.menuList')
     // if(document.body.w)
@@ -20,6 +33,13 @@ function Navbar() {
     }
   }
 
+  const handleLogOut = () => {
+    signOut(auth)
+    toast.success('Logout Successful')
+    setModalOpen(false)
+    navigate('/log-in')
+  }
+
   return (
     <div className='navbar'>
       <NavLink to='/'>
@@ -28,7 +48,24 @@ function Navbar() {
       <nav>
         <ul className='menuList'>
           <li>
-            <NavLink to='/sign-up'>Sign Up</NavLink>
+            {!user ? (
+              <NavLink to='/sign-up'>Sign Up</NavLink>
+            ) : (
+              <>
+                <NavLink to='#' onClick={() => setModalOpen(true)}>
+                  Log Out
+                </NavLink>
+                {modalOpen && (
+                  <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
+                    <p>Are You Sure You Want to Log Out ?</p>
+                    <div className='modal-btn-conatiner'>
+                      <button onClick={() => setModalOpen(false)}>No</button>
+                      <button onClick={handleLogOut}>Log Out</button>
+                    </div>
+                  </Modal>
+                )}
+              </>
+            )}
           </li>
           <li>
             <NavLink to='/'>About Us</NavLink>
