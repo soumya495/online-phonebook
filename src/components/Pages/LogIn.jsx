@@ -78,7 +78,7 @@ function LogIn() {
               Not a member? <NavLink to='/sign-up'>Sign up</NavLink>
             </div>
           </form>
-          <SocialLogin />
+          {/* <SocialLogin /> */}
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ export const GlobalContextProvider = ({ children }) => {
   }, [])
 
   return (
-    <GlobalContext.Provider value={{ user }}>
+    <GlobalContext.Provider value={{ user, setLoading }}>
       {!loading && children}
     </GlobalContext.Provider>
   )
