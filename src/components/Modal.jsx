@@ -1,7 +1,10 @@
-function Modal({ modalOpen, setModalOpen, children }) {
+function Modal({ modalOpen, setModalOpen, styleEl, children }) {
   return (
     <div className='modal-wrapper' onClick={() => setModalOpen(false)}>
-      <div className='modal-body' onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`modal-body ${styleEl ?? ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
     </div>

@@ -68,7 +68,7 @@ function Navbar() {
             )}
           </li>
           <li>
-            <NavLink to='/'>About Us</NavLink>
+            <NavLink to='/profile'>Profile</NavLink>
           </li>
           <li>
             <NavLink to='/contact-us'>Contact Us</NavLink>

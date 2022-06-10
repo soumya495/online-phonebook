@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import FileBase from 'react-file-base64'
 import { createUserWithEmailAndPassword } from '@firebase/auth'
 import { auth, db } from '../../firebase'
-import { addDoc, collection } from '@firebase/firestore'
+import { doc, setDoc } from '@firebase/firestore'
 import Loading from '../Loading'
 
 function SignUp() {
@@ -55,10 +55,10 @@ function SignUp() {
     setLoading(true)
 
     try {
-      const result = await createUserWithEmailAndPassword(auth, email, password)
-      const colRef = collection(db, 'users')
       setLoading(true)
-      await addDoc(colRef, {
+      const result = await createUserWithEmailAndPassword(auth, email, password)
+
+      await setDoc(doc(db, `users/${result.user.uid}`), {
         id: result.user.uid,
         name: name,
         email: email,
@@ -68,6 +68,7 @@ function SignUp() {
         linkedInLink: linkedInLink,
         imageData: imageData,
       })
+
       setLoading(false)
       toast.success(`Sign Up Successful`)
       navigate('/profile')

@@ -5,28 +5,40 @@ import { useState, useContext, useEffect } from 'react'
 import Modal from '../Modal'
 import { toast } from 'react-toastify'
 import { sendEmailVerification } from '@firebase/auth'
-import { useNavigate } from 'react-router-dom'
-import { collection, getDocs, query, where } from '@firebase/firestore'
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  getDoc,
+} from '@firebase/firestore'
 import { db } from '../../firebase'
 import Loading from '../Loading'
+import UpdateProfileModal from '../UpdateProfileModal'
 
 function Profile() {
   const { user } = useContext(GlobalContext)
   const [modalOpen, setModalOpen] = useState(false)
-  const [mailSent, setMailSent] = useState(false)
-  const navigate = useNavigate()
+  const [mailSent, setMailSent] = useState(
+    localStorage.getItem('mailsent')
+      ? JSON.parse(localStorage.getItem('mailsent'))
+      : false
+  )
   const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [open, setOpen] = useState(false)
 
   const { emailVerified, providerData } = user
-  const { displayName, email, photoURL, phoneNumber } = providerData[0]
+  const { email } = providerData[0]
 
   console.log(user)
 
   const SendVerificationMail = async () => {
     try {
       await sendEmailVerification(user)
-      toast.success('email send')
+      toast.success('verfication link sent')
+      localStorage.setItem('mailsent', JSON.stringify(true))
       setMailSent(true)
     } catch (error) {
       toast.error(error.message)
@@ -35,17 +47,18 @@ function Profile() {
 
   useEffect(() => {
     if (emailVerified) {
+      localStorage.removeItem('mailsent')
       getUserData()
     }
   }, [])
 
   const getUserData = async () => {
-    const q = query(collection(db, 'users'), where('id', '==', user.uid))
-    // const colRef = collection(db, 'users')
     setLoading(true)
-    const res = await getDocs(q)
-    const dataFromDb = res.docs[0]._document.data.value.mapValue.fields
-    setUserData(dataFromDb)
+
+    const docRef = doc(db, 'users', user.uid)
+    const docSnap = await getDoc(docRef)
+    console.log('Data from db', docSnap.data())
+    setUserData(docSnap.data())
     setLoading(false)
   }
 
@@ -58,7 +71,8 @@ function Profile() {
         <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
           <p className='mainModalText'>Verify Your Email Address</p>
           <p className='smallModaltext'>
-            A verification {mailSent ? 'has been sent ' : 'will be sent '} to
+            A verification link {mailSent ? 'has been sent ' : 'will be sent '}
+            to
           </p>
           <p className='smallModaltext modaltextgray'>{email}</p>
           {mailSent && <p>Reload Once You Verify!</p>}
@@ -74,14 +88,12 @@ function Profile() {
         <div className={styles.left}>
           <img
             src={
-              userData
-                ? userData.imageData.stringValue
-                : '../../Assets/default-avatar.png'
+              userData ? userData.imageData : '../../Assets/default-avatar.png'
             }
             alt='user'
             width={100}
           />
-          <h4>{userData ? userData.name.stringValue : ''}</h4>
+          <h4>{userData ? userData.name : ''}</h4>
         </div>
         <div className={styles.right}>
           <div className={styles.info}>
@@ -89,11 +101,11 @@ function Profile() {
             <div className={styles.info_data}>
               <div className={styles.data}>
                 <h4>Email</h4>
-                <p>{userData ? userData.email.stringValue : ''}</p>
+                <p>{userData ? userData.email : ''}</p>
               </div>
               <div className={styles.data}>
                 <h4>Phone</h4>
-                <p>{userData ? userData.phoneNumber.stringValue : ''}</p>
+                <p>{userData ? userData.phoneNumber : ''}</p>
               </div>
             </div>
           </div>
@@ -104,33 +116,60 @@ function Profile() {
                 <h4>My Phonebook</h4>
                 <p />
               </div>
-              <div className={styles.data}>
-                <button className={styles.btn}>Logout</button>
-                <p />
+              <div className='profile-btns'>
+                <button>My Directory</button>
+                <button onClick={() => setOpen(true)}>Update Profile</button>
               </div>
             </div>
           </div>
           <div className={styles.social_media}>
             <ul>
-              <li>
-                <a href='#'>
-                  <i className='fab fa-facebook-f' />
-                </a>
-              </li>
-              <li>
-                <a href='#'>
-                  <i className='fab fa-twitter' />
-                </a>
-              </li>
-              <li>
-                <a href='#'>
-                  <i className='fab fa-instagram' />
-                </a>
-              </li>
+              {userData && userData.facebookLink && (
+                <li>
+                  <a
+                    href={new URL(userData.facebookLink)}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <i className='fab fa-facebook-f' />
+                  </a>
+                </li>
+              )}
+              {userData && userData.instagramLink && (
+                <li>
+                  <a
+                    href={new URL(userData.instagramLink)}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <i className='fab fa-instagram' />
+                  </a>
+                </li>
+              )}
+              {userData && userData.linkedInLink && (
+                <li>
+                  <a
+                    href={new URL(userData.linkedInLink)}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <i className='fab fa-linkedin' />
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
       </div>
+      {userData && open && (
+        <UpdateProfileModal
+          userData={userData}
+          open={open}
+          setOpen={setOpen}
+          setLoading={setLoading}
+          getData={getUserData}
+        />
+      )}
     </div>
   )
 }

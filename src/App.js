@@ -27,6 +27,9 @@ function App() {
           <Route path='/profile' element={<PrivateRoute />}>
             <Route path='/profile' element={<Profile />} />
           </Route>
+          <Route path='/my-directory' element={<PrivateRoute />}>
+            <Route path='/my-directory' element={<Profile />} />
+          </Route>
           <Route path='/contact-us' element={<ContactUs />} />
         </Routes>
       </Router>
