@@ -61,19 +61,11 @@ function Profile() {
             A verification {mailSent ? 'has been sent ' : 'will be sent '} to
           </p>
           <p className='smallModaltext modaltextgray'>{email}</p>
+          {mailSent && <p>Reload Once You Verify!</p>}
           <div className='modal-btn-conatiner'>
             <button onClick={() => SendVerificationMail()}>
               {mailSent ? 'Resend' : 'Verify'}
             </button>
-            {mailSent && (
-              <button
-                onClick={() => {
-                  if (emailVerified) navigate('/profile')
-                }}
-              >
-                Go to Profile
-              </button>
-            )}
           </div>
         </Modal>
       )}
