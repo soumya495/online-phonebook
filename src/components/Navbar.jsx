@@ -71,7 +71,7 @@ function Navbar() {
             <NavLink to='/'>About Us</NavLink>
           </li>
           <li>
-            <a>Media</a>
+            <NavLink to='/contact-us'>Contact Us</NavLink>
           </li>
           <li>
             <a>About Directory</a>

@@ -7,6 +7,7 @@ import Home from './components/Pages/Home'
 import LogIn from './components/Pages/LogIn'
 import SignUp from './components/Pages/SignUp'
 import PrivateRoute from './components/PrivateRoute'
+import ContactUs from './components/Pages/ContactUs'
 
 // toastify
 import { ToastContainer } from 'react-toastify'
@@ -26,6 +27,7 @@ function App() {
           <Route path='/profile' element={<PrivateRoute />}>
             <Route path='/profile' element={<Profile />} />
           </Route>
+          <Route path='/contact-us' element={<ContactUs />} />
         </Routes>
       </Router>
       <ToastContainer
