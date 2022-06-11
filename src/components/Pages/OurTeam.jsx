@@ -19,8 +19,8 @@ function OurTeam() {
               <div className={styles.info}>
                 <div className={styles.name}>Soumya Banerjee</div>
                 <div className={styles.details}>
-                  Full-stack Wed Developer(React JS, Next Js, Firebase, HTML,
-                  CSS, JS),Photographer
+                  FrontEnd Web Developer(React JS, Next Js, Firebase, HTML, CSS,
+                  JS),Photographer
                 </div>
                 <div className={styles.sociallinks}>
                   <a
@@ -98,7 +98,7 @@ function OurTeam() {
                   <div className={styles.name}>Darshan Bhandari</div>
                   <div className={styles.details}>
                     {' '}
-                    Fronted-WedDeveloper(HTML, CSS, JS,Ui/UX Designer)
+                    Frontend-Web Developer(HTML, CSS, JS,Ui/UX Designer)
                   </div>
                   <div className={styles.sociallinks}>
                     <a href='#' target='_blank' rel='noopener noreferrer'>
@@ -136,7 +136,7 @@ function OurTeam() {
                   <div className={styles.name}>Simran Tiwary</div>
                   <div className={styles.details}>
                     {' '}
-                    Wed Developer(HTML,CSS,JS)
+                    Web Developer(HTML,CSS,JS)
                   </div>
                   <div className={styles.sociallinks}>
                     <a
