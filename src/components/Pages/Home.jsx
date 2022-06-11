@@ -1,6 +1,12 @@
 import Navbar from '../Navbar'
+import GlobalContext from '../../GlobalContext'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
+  const { user } = useContext(GlobalContext)
+  const navigate = useNavigate()
+
   return (
     <div className='container'>
       <Navbar />
@@ -12,7 +18,16 @@ function Home() {
           </h2>
           <h3>Keep your contacts safe</h3>
           <p>(Compatible/Generic)</p>
-          <button type='button'>
+          <button
+            type='button'
+            onClick={() => {
+              if (user) {
+                navigate('/my-directory')
+              } else {
+                navigate('/log-in')
+              }
+            }}
+          >
             Explore
             <img src='../../Assets/arrow.png' />
           </button>
@@ -23,13 +38,13 @@ function Home() {
         </div>
       </div>
       <div className='sociallinks'>
-        <a href>
+        <a href='#'>
           <img src='../../Assets/fb.png' />
         </a>
-        <a href>
+        <a href='#'>
           <img src='../../Assets/ig.png' />
         </a>
-        <a href>
+        <a href='#'>
           <img src='../../Assets/tw.png' />
         </a>
       </div>

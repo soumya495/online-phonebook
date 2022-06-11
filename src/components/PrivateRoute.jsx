@@ -10,7 +10,7 @@ function PrivateRoute() {
     setLoggedIn(user)
   }, [])
 
-  return loggedIn ? <Outlet /> : <Navigate to='/sign-up' />
+  return loggedIn ? <Outlet /> : <Navigate to='/log-in' />
 }
 
 export default PrivateRoute

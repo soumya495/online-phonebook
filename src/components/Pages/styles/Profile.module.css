@@ -27,10 +27,12 @@
 
 .wrapper .left h4 {
   margin-bottom: 10px;
+  /* word-break: break-all; */
 }
 
 .wrapper .left p {
   font-size: 12px;
+  word-break: break-all;
 }
 
 .wrapper .right {
@@ -54,6 +56,7 @@
   color: #353c4e;
   text-transform: uppercase;
   letter-spacing: 5px;
+  word-break: break-all;
 }
 
 .wrapper .right .info_data,
@@ -72,6 +75,7 @@
 .wrapper .right .projects_data .data h4 {
   color: #353c4e;
   margin-bottom: 5px;
+  word-break: break-all;
 }
 
 .wrapper .right .info_data .data p,
@@ -79,6 +83,7 @@
   font-size: 13px;
   margin-bottom: 10px;
   color: #919aa3;
+  word-break: break-all;
 }
 
 .wrapper .social_media ul {
@@ -99,6 +104,7 @@
   color: #fff;
   display: block;
   font-size: 18px;
+  word-break: break-all;
 }
 .btn {
   border: none;

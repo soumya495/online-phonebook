@@ -82,7 +82,9 @@ function Profile() {
         <div className={styles.left}>
           <img
             src={
-              userData ? userData.imageData : '../../Assets/default-avatar.png'
+              userData && userData.imageData
+                ? userData.imageData
+                : '../../Assets/default-avatar.png'
             }
             alt='user'
             width={100}
