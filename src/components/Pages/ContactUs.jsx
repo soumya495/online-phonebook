@@ -10,6 +10,7 @@ import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { toast } from 'react-toastify'
 import emailjs from 'emailjs-com'
+import Loading from '../Loading'
 
 function ContactUs() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ function ContactUs() {
     email: '',
     message: '',
   })
+  const [loading, setLoading] = useState(false)
 
   const { name, email, message } = formData
 
@@ -29,6 +31,8 @@ function ContactUs() {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault()
+
+    setLoading(true)
 
     await emailjs
       .sendForm(
@@ -50,9 +54,11 @@ function ContactUs() {
       const colref = collection(db, 'contact-form')
       await addDoc(colref, formData)
       toast.success('Thank You For Contacting Us')
+      setLoading(false)
     } catch (error) {
       console.log(error.message)
       toast.error('Could not send form Data')
+      setLoading(false)
     }
     setFormData({
       name: '',
@@ -64,6 +70,7 @@ function ContactUs() {
   return (
     <>
       <div className='container'>
+        {loading && <Loading />}
         <Navbar />
         <div className='contact-section'>
           <div className='contact-info'>

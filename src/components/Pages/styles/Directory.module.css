@@ -39,6 +39,23 @@
   transform: rotate(270deg);
 }
 
+.sortBtn {
+  border: none;
+  outline: none;
+  background-color: unset;
+  border: 2px solid #fb5283;
+  padding: 0.25rem 0.75rem;
+  margin-top: 0.75rem;
+  border-radius: 12px;
+  transition: all 300ms ease-in;
+  cursor: pointer;
+}
+
+.sortBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 2px 2px 5px 0px #fb5283;
+}
+
 .addBtn svg {
   /* width: 90%; */
   transition: transform 300ms ease-in;
@@ -106,7 +123,31 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding-bottom: 25px;
+  padding: 12.5px 5px;
+  position: relative;
+  transition: background 300ms ease-in;
+  border-radius: 12px;
+}
+
+.contact:hover {
+  background-color: rgb(244, 244, 244);
+}
+
+.contact svg {
+  position: absolute;
+  right: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 300ms ease-in;
+}
+
+.contact:hover svg {
+  opacity: 1;
+  visibility: visible;
+}
+
+.contact svg:hover {
+  transform: scale(1.5);
 }
 
 .contact .pdetails {
@@ -124,4 +165,30 @@
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: #302f2f;
   font-size: 15px;
+}
+
+.modalUserData {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalUserData img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.modalUserData p {
+  text-align: center !important;
+  word-break: break-all;
+}
+
+.modalUserData .linkkks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
