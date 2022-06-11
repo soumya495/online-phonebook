@@ -173,7 +173,7 @@ function OurTeam() {
                 <div className={styles.info}>
                   <div className={styles.name}>Subinaya Mukherjee</div>
                   <div className={styles.details}>
-                    Full-stack Wed Developer(HTML, CSS, JS,Python)
+                    Full-stack Web Developer(HTML, CSS, JS,Python)
                   </div>
                   <div className={styles.sociallinks}>
                     <a
