@@ -1,0 +1,127 @@
+.container {
+  position: relative;
+  width: 330px;
+  height: 580px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 2px 5px 30px rgba(127, 123, 123, 0.5);
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.backLink {
+  position: absolute;
+  right: 1.5rem;
+  top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-decoration: none;
+  color: #302f2f;
+}
+
+.addBtn {
+  background: linear-gradient(to right, #fb5283, #ff3527);
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+  z-index: 200;
+  cursor: pointer;
+  box-shadow: 4px 4px 13px 0px #fb5283;
+}
+
+.addBtn:hover svg {
+  transform: rotate(270deg);
+}
+
+.addBtn svg {
+  /* width: 90%; */
+  transition: transform 300ms ease-in;
+}
+
+.backLink img {
+  width: 20px;
+}
+
+.container dt {
+  position: sticky;
+  top: 0;
+}
+.container form {
+  background: rgb(255, 255, 255);
+}
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.noContact {
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.noContact p {
+  font-size: smaller;
+}
+
+.noContact img {
+  width: 100%;
+}
+
+.container form {
+  width: 100%;
+  border: 1px solid rgb(82, 74, 235);
+  border-radius: 17px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container form input {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  font-size: 16px;
+  font-weight: 660;
+  padding: 8px 10px;
+}
+
+.container form i {
+  padding-left: 5px;
+}
+
+.contactlist {
+  padding: 20px 0;
+  padding-left: 10px;
+}
+.contact {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding-bottom: 25px;
+}
+
+.contact .pdetails {
+  padding-left: 15px;
+}
+
+.contact img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.contact .pdetails h4 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #302f2f;
+  font-size: 15px;
+}

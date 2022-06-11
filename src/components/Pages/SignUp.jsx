@@ -8,6 +8,11 @@ import { createUserWithEmailAndPassword } from '@firebase/auth'
 import { auth, db } from '../../firebase'
 import { doc, setDoc } from '@firebase/firestore'
 import Loading from '../Loading'
+import { isImage } from '../../ValidImage'
+
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+
+import { storage } from '../../firebase'
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -22,6 +27,47 @@ function SignUp() {
     imageData: '',
   })
   const [loading, setLoading] = useState(false)
+  // const [progress, setProgress] = useState(0)
+  const [url, setUrl] = useState(null)
+  const [fileUp, setFileUp] = useState(null)
+
+  const handleUploadChange = () => {
+    const file = document.getElementById('fileInpUser').files[0]
+    if (!isImage(file)) {
+      toast.error('Please upload image files')
+      return
+    }
+    if (file) {
+      setFileUp(file.name)
+    }
+  }
+
+  const uploadFile = async (e) => {
+    e.preventDefault()
+    const file = document.getElementById('fileInpUser').files[0]
+    console.log(file)
+
+    if (!file) return
+    const storageRef = ref(storage, `files/${file.name}`)
+    const uploadTask = uploadBytesResumable(storageRef, file)
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const prog =
+          Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      },
+      (err) => {
+        console.log(err)
+        toast('Not Uploaded')
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          setUrl(url)
+        })
+      }
+    )
+  }
 
   const {
     name,
@@ -46,11 +92,17 @@ function SignUp() {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault()
+
     if (password !== confirmPassword) {
       toast.warn('Passwords do not match')
       return
     }
     console.log('Sign Up Data: ', formData)
+
+    if (fileUp && !url) {
+      toast.warn('Wait for the image to upload')
+      return
+    }
 
     setLoading(true)
 
@@ -66,7 +118,7 @@ function SignUp() {
         facebookLink: facebookLink,
         instagramLink: instagramLink,
         linkedInLink: linkedInLink,
-        imageData: imageData,
+        imageData: url,
       })
 
       setLoading(false)
@@ -193,16 +245,23 @@ function SignUp() {
                 <span />
                 <label className='details'>LinkedIn Link</label>
               </div>
-              <div className='input-box'>
-                <FileBase
+              <div className='filebox'>
+                {/* <FileBase
                   type='file'
                   multiple={false}
                   onDone={({ base64 }) =>
                     setFormData({ ...formData, imageData: base64 })
                   }
+                /> */}
+                <input
+                  type='file'
+                  id='fileInpUser'
+                  onChange={handleUploadChange}
                 />
 
-                <label className='details'>Upload Photo</label>
+                <button onClick={uploadFile} disabled={url ? true : false}>
+                  {url ? 'Uploaded' : 'Upload Photo'}
+                </button>
               </div>
             </div>
             <div className='full-width'>

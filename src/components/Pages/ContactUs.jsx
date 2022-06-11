@@ -78,7 +78,7 @@ function ContactUs() {
             </div>
             <div>
               <FontAwesomeIcon icon={solid('clock')} />
-              Mon - Fri 8:00 AM to 5:00 PM
+              24 X 7 Support
             </div>
           </div>
           <div className='contact-form'>

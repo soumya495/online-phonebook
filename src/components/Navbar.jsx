@@ -25,7 +25,7 @@ function Navbar() {
   function togglemenu() {
     const menuList = document.querySelector('.menuList')
     if (menuList.style.maxHeight === '0px') {
-      menuList.style.maxHeight = '130px'
+      menuList.style.maxHeight = '240px'
       menuList.style.paddingBlock = '2rem'
     } else {
       menuList.style.maxHeight = '0px'
@@ -48,6 +48,15 @@ function Navbar() {
       <nav>
         <ul className='menuList'>
           <li>
+            <NavLink to='/profile'>Profile</NavLink>
+          </li>
+          <li>
+            <NavLink to='/contact-us'>Contact Us</NavLink>
+          </li>
+          <li>
+            <NavLink to='/our-team'>Our Team</NavLink>
+          </li>
+          <li>
             {!user ? (
               <NavLink to='/sign-up'>Sign Up</NavLink>
             ) : (
@@ -66,15 +75,6 @@ function Navbar() {
                 )}
               </>
             )}
-          </li>
-          <li>
-            <NavLink to='/profile'>Profile</NavLink>
-          </li>
-          <li>
-            <NavLink to='/contact-us'>Contact Us</NavLink>
-          </li>
-          <li>
-            <a>About Directory</a>
           </li>
         </ul>
       </nav>

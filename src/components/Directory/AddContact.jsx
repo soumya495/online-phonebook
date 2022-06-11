@@ -1,31 +1,42 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import Modal from '../Modal'
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 import FileBase from 'react-file-base64'
-import { auth, db } from '../firebase'
-import { setDoc, doc } from '@firebase/firestore'
-import Modal from './Modal'
-import Loading from './Loading'
+import { auth, db } from '../../firebase'
+import { doc, setDoc, updateDoc, arrayUnion, getDoc } from '@firebase/firestore'
+import { useContext } from 'react'
+import GlobalContext from '../../GlobalContext'
+import { v4 as uuidv4 } from 'uuid'
+import { toast } from 'react-toastify'
 
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { storage } from '../../firebase'
+import { isImage } from '../../ValidImage'
 
-import { storage } from '../firebase'
-
-import { isImage } from '../ValidImage'
-
-function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
+function AddContact({ setOpen, setLoading, getData }) {
+  const { user } = useContext(GlobalContext)
   const [formData, setFormData] = useState({
-    name: userData.name,
-    phoneNumber: userData.phoneNumber,
-    facebookLink: userData.facebookLink,
-    instagramLink: userData.instagramLink,
-    linkedInLink: userData.linkedInLink,
-    imageData: userData.imageData,
+    name: '',
+    phoneNumber: '',
+    facebookLink: '',
+    instagramLink: '',
+    linkedInLink: '',
+    imageData: '',
   })
-
-  // const [uploaded, setUploaded] = useState(false)
   const [url, setUrl] = useState(null)
   const [fileUp, setFileUp] = useState(null)
+
+  const handleUploadChange = () => {
+    const file = document.getElementById('fileInpCont').files[0]
+
+    if (!isImage(file)) {
+      toast.error('Please upload image files')
+      return
+    }
+
+    if (file) {
+      setFileUp(file.name)
+    }
+  }
 
   const {
     name,
@@ -36,25 +47,13 @@ function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
     imageData,
   } = formData
 
-  const handleUploadChange = () => {
-    const file = document.getElementById('fileInpUpd').files[0]
-    if (!isImage(file)) {
-      toast.error('Please upload image files')
-      return
-    }
-    if (file) {
-      setFileUp(file.name)
-    }
-  }
-
   const uploadFile = async (e) => {
     e.preventDefault()
-    const file = document.getElementById('fileInpUpd').files[0]
+    const file = document.getElementById('fileInpCont').files[0]
     console.log(file)
 
     if (!file) return
-
-    const storageRef = ref(storage, `files/${file.name}`)
+    const storageRef = ref(storage, `contacts/${user.uid}/${file.name}`)
     const uploadTask = uploadBytesResumable(storageRef, file)
 
     uploadTask.on(
@@ -69,7 +68,6 @@ function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url)
           setUrl(url)
         })
       }
@@ -91,35 +89,44 @@ function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
       return
     }
 
-    console.log(url)
-    console.log('Sign Up Data: ', formData)
-
-    const updatedData = {
-      ...formData,
-      id: userData.id,
-      email: userData.email,
-      imageData: url ?? userData.imageData,
-    }
-
     setOpen(false)
-
     try {
       setLoading(true)
-      await setDoc(doc(db, `users/${userData.id}`), updatedData)
-      toast.success('Profile Updated')
+      const docRef = doc(db, `contacts`, `${user.uid}`)
+      const docSnap = await getDoc(docRef)
+      if (!docSnap.data()) {
+        await setDoc(doc(db, 'contacts', user.uid), {
+          users: arrayUnion({
+            ...formData,
+            id: uuidv4(),
+            imageData: url,
+          }),
+        })
+      } else {
+        await updateDoc(doc(db, 'contacts', user.uid), {
+          users: arrayUnion({
+            ...formData,
+            id: uuidv4(),
+            imageData: url,
+          }),
+        })
+      }
+
+      setLoading(false)
+      getData()
+      toast.success('Added to contact')
     } catch (error) {
+      setLoading(false)
       console.log(error.message)
-      toast.error('There was some error')
+      toast.error('Failed to add contact')
     }
 
-    getData()
+    console.log('Contact Data', formData)
   }
 
   return (
-    <Modal modalOpen={open} setModalOpen={setOpen} styleEl='formModalBody'>
-      {/* <div className='form-wrapper sign-up-wrapper'> */}
-      {/* <div className='center'> */}
-      <h1>Update Profile</h1>
+    <Modal setModalOpen={setOpen} styleEl='formModalBody'>
+      <h1>Add Contact</h1>
       <form onSubmit={handleOnSubmit}>
         <div className='user-details'>
           <div className='input-box'>
@@ -180,7 +187,15 @@ function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
             <label className='details'>LinkedIn Link</label>
           </div>
           <div className='filebox'>
-            <input type='file' id='fileInpUpd' onChange={handleUploadChange} />
+            {/* <FileBase
+              type='file'
+              multiple={false}
+              onDone={({ base64 }) =>
+                setFormData({ ...formData, imageData: base64 })
+              }
+            />
+            <label className='details'>Upload Photo</label> */}
+            <input type='file' id='fileInpCont' onChange={handleUploadChange} />
 
             <button onClick={uploadFile} disabled={url ? true : false}>
               {url ? 'Uploaded' : 'Upload Photo'}
@@ -191,11 +206,8 @@ function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
           <input type='submit' defaultValue='Sign-Up' />
         </div>
       </form>
-      {/* <SocialLogin /> */}
-      {/* </div> */}
-      {/* </div> */}
     </Modal>
   )
 }
 
-export default UpdateProfileModal
+export default AddContact

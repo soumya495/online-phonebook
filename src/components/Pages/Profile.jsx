@@ -5,17 +5,11 @@ import { useState, useContext, useEffect } from 'react'
 import Modal from '../Modal'
 import { toast } from 'react-toastify'
 import { sendEmailVerification } from '@firebase/auth'
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-  doc,
-  getDoc,
-} from '@firebase/firestore'
+import { doc, getDoc } from '@firebase/firestore'
 import { db } from '../../firebase'
 import Loading from '../Loading'
 import UpdateProfileModal from '../UpdateProfileModal'
+import { useNavigate } from 'react-router-dom'
 
 function Profile() {
   const { user } = useContext(GlobalContext)
@@ -28,9 +22,9 @@ function Profile() {
   const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
-
   const { emailVerified, providerData } = user
   const { email } = providerData[0]
+  const navigate = useNavigate()
 
   console.log(user)
 
@@ -92,6 +86,7 @@ function Profile() {
             }
             alt='user'
             width={100}
+            height={100}
           />
           <h4>{userData ? userData.name : ''}</h4>
         </div>
@@ -117,7 +112,9 @@ function Profile() {
                 <p />
               </div>
               <div className='profile-btns'>
-                <button>My Directory</button>
+                <button onClick={() => navigate('/my-directory')}>
+                  My Directory
+                </button>
                 <button onClick={() => setOpen(true)}>Update Profile</button>
               </div>
             </div>

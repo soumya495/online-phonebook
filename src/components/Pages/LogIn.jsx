@@ -3,7 +3,10 @@ import Navbar from '../Navbar'
 import SocialLogin from '../SocialLogin'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { signInWithEmailAndPassword } from '@firebase/auth'
+import {
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from '@firebase/auth'
 import { auth } from '../../firebase'
 
 function LogIn() {
@@ -41,6 +44,19 @@ function LogIn() {
     })
   }
 
+  const handlePasswordReset = async () => {
+    if (!email) {
+      toast.error('Please fill the email')
+      return
+    }
+    try {
+      await sendPasswordResetEmail(auth, email)
+      toast.success(`Reset link sent`)
+    } catch (err) {
+      toast.error(err.message)
+    }
+  }
+
   return (
     <div className='container'>
       <Navbar />
@@ -72,7 +88,9 @@ function LogIn() {
               <span />
               <label>Password</label>
             </div>
-            <div className='pass'>Forgot Password?</div>
+            <div className='pass' onClick={handlePasswordReset}>
+              Forgot Password?
+            </div>
             <input type='submit' defaultValue='Login' />
             <div className='signup_link'>
               Not a member? <NavLink to='/sign-up'>Sign up</NavLink>

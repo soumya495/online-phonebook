@@ -1,143 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact List Demo</title>
-    <link rel="stylesheet" href="cont_lst.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/e17619f5d8.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    
+    <link rel="stylesheet" href="cont_lst.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/e17619f5d8.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <section class="container">
-        <dt>
-            <form action="#">
-                <i class="fas fa-search"></i>
-                <input type="text" name="" id="search-item" placeholder="Search Contacts"
-                onkeyup="search()">
-            </form>
-        </dt>
-        <div class="contact-list" id="contact-list">
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Darshan Bhandari</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Soumya Banerjee</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>J Srikanth Chetty</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Subinaya Mukherjee</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Kanchan Sarkar</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Chanchal Mondal</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Simran Tiwary</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Rajdeep Maji</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Tom Cruise</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Michael Jackson</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Robert De Niro</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Tom Hardy</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Daniel Craig</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Tobey Maguire</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Brad Pitt</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Willem Dafoe</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Johnny Depp</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Al Pacino</h4>
-                </div>
-            </div>
-            <div class="contact">
-                <img src="pics/person-icon.png" width="25px">
-                <div class="p-details">
-                    <h4>Marlon Brando</h4>
-                </div>
-            </div>
+      <dt>
+        <form action="#">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            name=""
+            id="search-item"
+            placeholder="Search Contacts"
+            onkeyup="search()"
+          />
+        </form>
+      </dt>
+      <div class="contact-list" id="contact-list">
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Darshan Bhandari</h4>
+          </div>
         </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Soumya Banerjee</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>J Srikanth Chetty</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Subinaya Mukherjee</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Kanchan Sarkar</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Chanchal Mondal</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Simran Tiwary</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Rajdeep Maji</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Tom Cruise</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Michael Jackson</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Robert De Niro</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Tom Hardy</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Daniel Craig</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Tobey Maguire</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Brad Pitt</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Willem Dafoe</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Johnny Depp</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Al Pacino</h4>
+          </div>
+        </div>
+        <div class="contact">
+          <img src="pics/person-icon.png" width="25px" />
+          <div class="p-details">
+            <h4>Marlon Brando</h4>
+          </div>
+        </div>
+      </div>
     </section>
 
     <script src="cont_lst.js"></script>
-</body>
+  </body>
 </html>
