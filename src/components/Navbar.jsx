@@ -13,7 +13,7 @@ function Navbar() {
 
   const [modalOpen, setModalOpen] = useState(false)
 
-  console.log(user)
+  // console.log(user)
 
   useEffect(() => {
     const menuList = document.querySelector('.menuList')

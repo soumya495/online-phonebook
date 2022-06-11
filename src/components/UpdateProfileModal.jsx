@@ -50,7 +50,7 @@ function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
   const uploadFile = async (e) => {
     e.preventDefault()
     const file = document.getElementById('fileInpUpd').files[0]
-    console.log(file)
+    // console.log(file)
 
     if (!file) return
 
@@ -64,12 +64,12 @@ function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
           Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100
       },
       (err) => {
-        console.log(err)
+        // console.log(err)
         toast('Not Uploaded')
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url)
+          // console.log(url)
           setUrl(url)
         })
       }
@@ -91,8 +91,8 @@ function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
       return
     }
 
-    console.log(url)
-    console.log('Sign Up Data: ', formData)
+    // console.log(url)
+    // console.log('Sign Up Data: ', formData)
 
     const updatedData = {
       ...formData,
@@ -108,7 +108,7 @@ function UpdateProfileModal({ userData, open, setOpen, setLoading, getData }) {
       await setDoc(doc(db, `users/${userData.id}`), updatedData)
       toast.success('Profile Updated')
     } catch (error) {
-      console.log(error.message)
+      // console.log(error.message)
       toast.error('There was some error')
     }
 

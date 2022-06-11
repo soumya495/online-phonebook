@@ -37,7 +37,7 @@ function LogIn() {
       toast.error(error.message)
     }
 
-    console.log('Login Data: ', formData)
+    // console.log('Login Data: ', formData)
     setFormData({
       email: '',
       password: '',

@@ -23,7 +23,7 @@ function MyDirectory() {
   const [loading, setLoading] = useState(false)
   const [sortedList, setSortedList] = useState(null)
 
-  console.log(user)
+  // console.log(user)
 
   const getData = async () => {
     const docRef = doc(db, `contacts`, `${user.uid}`)
@@ -34,7 +34,7 @@ function MyDirectory() {
       setDisplayUsers(null)
       setLoading(false)
     } else {
-      console.log('Hello: ', docSnap.data())
+      // console.log('Hello: ', docSnap.data())
       setContactList(docSnap.data().users)
       setDisplayUsers(docSnap.data().users)
       setLoading(false)
@@ -122,12 +122,12 @@ function MyDirectory() {
       setLoading(false)
     } catch (err) {
       toast.error('Failed to delete contact')
-      console.log(err.message)
+      // console.log(err.message)
       setLoading(false)
     }
   }
 
-  console.log(contactList)
+  // console.log(contactList)
 
   return (
     <div className='container directory-container'>

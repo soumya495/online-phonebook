@@ -26,7 +26,7 @@ function Profile() {
   const { email } = providerData[0]
   const navigate = useNavigate()
 
-  console.log(user)
+  // console.log(user)
 
   const SendVerificationMail = async () => {
     try {
@@ -51,12 +51,12 @@ function Profile() {
 
     const docRef = doc(db, 'users', user.uid)
     const docSnap = await getDoc(docRef)
-    console.log('Data from db', docSnap.data())
+    // console.log('Data from db', docSnap.data())
     setUserData(docSnap.data())
     setLoading(false)
   }
 
-  console.log(userData)
+  // console.log(userData)
 
   return (
     <div className='container'>

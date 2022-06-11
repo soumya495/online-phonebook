@@ -43,10 +43,10 @@ function ContactUs() {
       )
       .then(
         (result) => {
-          console.log(result.text)
+          // console.log(result.text)
         },
         (error) => {
-          console.log(error.text)
+          // console.log(error.text)
         }
       )
 
@@ -56,7 +56,7 @@ function ContactUs() {
       toast.success('Thank You For Contacting Us')
       setLoading(false)
     } catch (error) {
-      console.log(error.message)
+      // console.log(error.message)
       toast.error('Could not send form Data')
       setLoading(false)
     }

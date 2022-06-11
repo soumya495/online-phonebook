@@ -45,7 +45,7 @@ function SignUp() {
   const uploadFile = async (e) => {
     e.preventDefault()
     const file = document.getElementById('fileInpUser').files[0]
-    console.log(file)
+    // console.log(file)
 
     if (!file) return
     const storageRef = ref(storage, `files/${file.name}`)
@@ -58,7 +58,7 @@ function SignUp() {
           Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100
       },
       (err) => {
-        console.log(err)
+        // console.log(err)
         toast('Not Uploaded')
       },
       () => {
@@ -97,7 +97,7 @@ function SignUp() {
       toast.warn('Passwords do not match')
       return
     }
-    console.log('Sign Up Data: ', formData)
+    // console.log('Sign Up Data: ', formData)
 
     if (fileUp && !url) {
       toast.warn('Wait for the image to upload')
@@ -125,7 +125,7 @@ function SignUp() {
       toast.success(`Sign Up Successful`)
       navigate('/profile')
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       toast.error(error.message)
       setLoading(false)
     }

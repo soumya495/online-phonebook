@@ -50,7 +50,7 @@ function AddContact({ setOpen, setLoading, getData }) {
   const uploadFile = async (e) => {
     e.preventDefault()
     const file = document.getElementById('fileInpCont').files[0]
-    console.log(file)
+    // console.log(file)
 
     if (!file) return
     const storageRef = ref(storage, `contacts/${user.uid}/${file.name}`)
@@ -63,7 +63,7 @@ function AddContact({ setOpen, setLoading, getData }) {
           Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100
       },
       (err) => {
-        console.log(err)
+        // console.log(err)
         toast('Not Uploaded')
       },
       () => {
@@ -117,11 +117,11 @@ function AddContact({ setOpen, setLoading, getData }) {
       toast.success('Added to contact')
     } catch (error) {
       setLoading(false)
-      console.log(error.message)
+      // console.log(error.message)
       toast.error('Failed to add contact')
     }
 
-    console.log('Contact Data', formData)
+    // console.log('Contact Data', formData)
   }
 
   return (
